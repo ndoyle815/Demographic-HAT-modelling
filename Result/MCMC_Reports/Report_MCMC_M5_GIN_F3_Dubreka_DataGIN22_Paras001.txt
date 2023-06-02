@@ -1,0 +1,3 @@
+effective sample size = 386.797
+convergence diagnostic = 1.55768
+CHECK MCMC OUTPUT
