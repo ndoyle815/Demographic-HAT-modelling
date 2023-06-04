@@ -8,6 +8,8 @@ set(0,'DefaultAxesTitleFontWeight','normal')
 
 myblue = [0.2627 0.5765 0.7647];
 mygreen = [0.1059 0.4706 0.2157];
+mypurple = [0.4627 0.1647 0.5137];
+myred = [0.6980 0.09412 0.1647];
 
 % read data
 % BOFFA EAST
@@ -51,11 +53,11 @@ for i = 1:6
     hold on
     %yyaxis right
     if i > 1
-        pdf = gampdf([0:0.01:20]-FittedParameters.Lower(i+3),FittedParameters.Parameters{i+3}(1),FittedParameters.Parameters{i+3}(2));
-        plot([0:0.01:20],pdf,'r','LineWidth',2)
+        pdf = gampdf([0:0.001:20]-FittedParameters.Lower(i+3),FittedParameters.Parameters{i+3}(1),FittedParameters.Parameters{i+3}(2));
+        plot([0:0.001:20],pdf,'k','LineWidth',3)
     else
-        pdf = betapdf([0:0.01:1],FittedParameters.Parameters{30}(1),FittedParameters.Parameters{30}(2));
-        plot([0:0.01:1],pdf,'r','LineWidth',2)
+        pdf = betapdf([0:0.001:1],FittedParameters.Parameters{30}(1),FittedParameters.Parameters{30}(2));
+        plot([0:0.001:1],pdf,'k','LineWidth',3)
     end
     %set(gca,'YColor','k','YTicklabel',[])
     xlabel(pars{i})

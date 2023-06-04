@@ -14,7 +14,7 @@ mypurple = [0.4627 0.1647 0.5137];
 myred = [0.6980 0.09412 0.1647];
 
 % read data
-reg = "FO";
+reg = "BE";
 
 if reg == "BE"
     % BOFFA EAST
@@ -55,7 +55,7 @@ for samp = 1:n
 end
 
 % quantiles
-YEOTQs = quantile(myYEOTs, [0.05 0.1 0.25 0.5 0.5 0.75 0.9 0.95]);
+YEOTQs = quantile(myYEOTs, [0.001 0.01 0.05 0.25 0.5 0.5 0.75 0.95 0.99 0.999]);
 
 EOTyears = [min(ElimByYears):1:max(YEOTQs)];
 
@@ -63,7 +63,10 @@ f = figure(2);
 f.Position = [205 450 1200 300];
 %set(gcf,'Renderer','painters')
 
-boxchart(YEOTQs,'BoxFaceColor',myblue,'BoxEdgeColor','k','BoxMedianLineColor','k','BoxFaceAlpha',0.5), view(90,90)
+b = boxchart(YEOTQs,'BoxFaceColor',myblue,'BoxEdgeColor','k','BoxMedianLineColor','k','BoxFaceAlpha',0.5), view(90,90);
+hold on
+x = [0:5];
+area(x,zeros(1,length(x))+2120,'BaseValue',2030,'FaceColor','k','FaceAlpha',0.2,'ShowBaseLine','off')
 hold on
 scatter([1, 2, 3, 4], mean(myYEOTs), 100, myred, "filled", "diamond")
 
@@ -72,8 +75,11 @@ for idx = 1:nstrat
     scatter(idx.*ones(size(myYEOTs,1)),myYEOTs(:,idx),25,'k','filled')
 end
 
+%b.JitterOutliers = 'off';
+b.MarkerStyle = 'none';
+
 ylim([min(EOTyears) max(EOTyears)+10])
-xticklabels({'Mean uniform', 'Intensified uniform', 'Mean targeted', 'Intensified targeted'})
+xticklabels({'Mean proportional', 'Intensified proportional', 'Mean targeted', 'Intensified targeted'})
 if reg == "FO"
     ylabel('Year')
 end

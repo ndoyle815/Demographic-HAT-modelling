@@ -13,13 +13,13 @@ myred = [0.6980 0.09412 0.1647];
 
 % read data
 % BOFFA EAST
-load('./Result2/GIN/F1_BoffaEast/Output_MCMC_M5_GIN_F1_BoffaEast_DataGIN22_Paras001.mat');
+%load('./Result/GIN/F1_BoffaEast/Output_MCMC_M5_GIN_F1_BoffaEast_DataGIN22_Paras001.mat');
 % BOFFA WEST
-%load('./Result3/GIN/F2_BoffaWest/Output_MCMC_M5_GIN_F2_BoffaWest_DataGIN22_Paras001.mat');
+%load('./Result/GIN/F2_BoffaWest/Output_MCMC_M5_GIN_F2_BoffaWest_DataGIN22_Paras001.mat');
 % DUBREKA
 %load('./Result/GIN/F3_Dubreka/Output_MCMC_M5_GIN_F3_Dubreka_DataGIN22_Paras001.mat');
 % FORECARIAH
-%load('./Result3/GIN/F4_Forecariah/Output_MCMC_M5_GIN_F4_Forecariah_DataGIN22_Paras001.mat');
+load('./Result/GIN/F4_Forecariah/Output_MCMC_M5_GIN_F4_Forecariah_DataGIN22_Paras001.mat');
 n = round(size(posterior,1)/2);
 
 names = ["r^{FW}", "r^{FP}", "r^{MY}", "r^{MW}", "r^{MP}", "u"];
@@ -28,7 +28,7 @@ f = figure(1);
 f.Position = [205 450 600 600];
 semilogy([1:n],neg_log_likelihood(1:n),'color',myblue)
 hold on
-semilogy([n+1:2*n],neg_log_likelihood(n+1:2*n),'color',myred)
+semilogy([n+1:2*n],neg_log_likelihood(n+1:2*n),'color',mygreen)
 xlabel('Iterations')
 title('Log Posterior')
 legend('Chain 1','Chain 2')
@@ -40,7 +40,7 @@ for i = 2:6
     subplot(2,3,i-1)
     plot([1:n],posterior(1:n,i),'color',myblue)
     hold on
-    plot([n+1:2*n],posterior(n+1:2*n,i),'color',myred)
+    plot([n+1:2*n],posterior(n+1:2*n,i),'color',mygreen)
     if i > 4
         xlabel('Iterations')
     end
@@ -53,7 +53,7 @@ end
 subplot(2,3,6)
 plot([1:n],posterior(1:n,11),'color',myblue)
 hold on
-plot([n+1:2*n],posterior(n+1:2*n,11),'color',myred)
+plot([n+1:2*n],posterior(n+1:2*n,11),'color',mygreen)
 xlabel('Iterations')
 title(fitted_para_names{11})
 %legend('Chain 1','Chain 2')
@@ -61,4 +61,4 @@ grid on
 
 % save
 %saveas(figure(1),strcat("BE_","AgeLogPost.png"))
-%saveas(figure(2),strcat("BE_","AgeTraces.png"))
+saveas(figure(2),strcat("FO_","AgeTraces.png"))
